@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout, Typography } from "antd";
 import Login from "./components/Login/Login";
+import NotFound from "./components/NotFound/NotFound";
 
 const { Header, Footer, Sider, Content } = Layout;
 const { Title } = Typography;
@@ -31,6 +32,7 @@ const App: React.FC = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Content>
