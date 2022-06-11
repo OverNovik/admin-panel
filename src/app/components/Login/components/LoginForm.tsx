@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import React from "react";
 
 const LoginForm: React.FC = () => {
@@ -21,9 +21,9 @@ const LoginForm: React.FC = () => {
       autoComplete="off"
     >
       <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: "Please input your username!" }]}
+        label="Email"
+        name="Email"
+        rules={[{ required: true, message: "Please input your Email!" }]}
       >
         <Input />
       </Form.Item>
