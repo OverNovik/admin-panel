@@ -1,0 +1,24 @@
+.layout {
+  height: "100vh";
+}
+
+.header {
+  background: "#1890ff";
+}
+
+.header-title {
+  text-align: "left";
+  color: "#ffffff";
+}
+
+.content {
+  width: "100%";
+  display: "flex";
+  flex-direction: "column";
+  align-items: "center";
+  justify-content: "center";
+}
+
+.footer {
+  text-align: "center";
+}
