@@ -1,25 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import 'antd/dist/antd.min.css';
-import App from "./app/App";
-import reportWebVitals from "./reportWebVitals";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import App from "./app";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-
-const client = new ApolloClient({
-  cache: new InMemoryCache,
-  uri: 'https://graphqlzero.almansi.me/api',
-})
-
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
 );
-
-reportWebVitals();
