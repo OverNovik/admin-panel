@@ -1,67 +1,46 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
+import { Spinner } from "app/components";
+import { operations, Types } from "./duck";
 
 const { Column } = Table;
 
-interface DataType {
-  key: React.Key;
-  firstName: string;
-  lastName: string;
-  age: number;
-  address: string;
-  tags: string[];
-}
-
-const data: DataType[] = [
-  {
-    key: "1",
-    firstName: "John",
-    lastName: "Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    firstName: "Jim",
-    lastName: "Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    firstName: "Joe",
-    lastName: "Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
-
 const AlbumsPage: React.FC = () => {
+  const { data, loading } = useQuery<
+    Types.GetAlbumsQuery,
+    Types.GetAlbumsQueryVariables
+  >(operations.getAlbums);
+
+  const dataItems = data?.albums?.data?.map((item) => {
+    return {
+      id: item?.id,
+      title: item?.title,
+      username: item?.user?.name,
+      numPhotos: item?.photos?.data?.length,
+    };
+  });
+
+  if (!data || loading) {
+    return <Spinner />;
+  }
+
   return (
     <Table
-      dataSource={data}
+      size="small"
+      dataSource={dataItems}
       pagination={{
-        defaultPageSize: 10,
-        showSizeChanger: true,
-        pageSizeOptions: ["10", "20", "30"],
+        pageSizeOptions: [1, 5, 10],
       }}
     >
       <Column title="ID" dataIndex="id" key="id" />
       <Column title="Title" dataIndex="title" key="title" />
-      <Column title="Username" dataIndex="username" key="username" />
+      <Column title="User name" dataIndex="username" key="username" />
+      <Column title="Number of photos" dataIndex="numPhotos" key="numPhotos" />
       <Column
-        title="Number of photos"
-        dataIndex="number of photos"
-        key="Number of photos"
-      />
-      <Column
-        title="Action"
         key="action"
         render={() => (
-          <Space size="middle">
+          <Space size="small">
             <Button type="link">Show</Button>
             <Button type="link">Edit</Button>
             <Button type="link">Delete</Button>

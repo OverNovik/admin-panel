@@ -1,0 +1,17 @@
+query getAlbums {
+  albums {
+    data {
+      id
+      title
+      user {
+        id
+        name
+      }
+      photos {
+        data {
+          id
+        }
+      }
+    }
+  }
+}
