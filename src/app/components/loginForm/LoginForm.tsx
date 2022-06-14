@@ -2,16 +2,26 @@
 import * as React from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Form, Input } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "app/utils";
+import { Spinner } from "..";
 import { operations, Types } from "./duck";
 
 const LoginForm: React.FC = () => {
+  const auth: any = useAuth();
+  const navigate = useNavigate();
+
   const { data, loading } = useQuery<
     Types.GetUsersQuery,
     Types.GetUsersQueryVariables
   >(operations.getUsers);
 
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    console.log(1111, data);
+    console.log(2222, values);
+    console.log(3333, loading);
+    auth.logIn(data);
+    navigate("/");
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -19,7 +29,7 @@ const LoginForm: React.FC = () => {
   };
 
   if (!data || loading) {
-    return <span>Loading...</span>;
+    return <Spinner />;
   }
 
   return (
