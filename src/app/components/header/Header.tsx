@@ -7,11 +7,7 @@ const { Title } = Typography;
 
 const Header: React.FC = () => (
   <HeaderEl className={styles.header}>
-    <Title
-      level={2}
-      // eslint-disable-next-line css-modules/no-undef-class
-      className={styles.title}
-    >
+    <Title level={2} className={styles.title}>
       Admin-panel
     </Title>
   </HeaderEl>

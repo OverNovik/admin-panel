@@ -20,7 +20,7 @@ const LoginForm: React.FC = () => {
     console.log(1111, data);
     console.log(2222, values);
     console.log(3333, loading);
-    auth.logIn(data);
+    auth.logIn(new Date().toString());
     navigate("/");
   };
 

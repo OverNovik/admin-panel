@@ -1,8 +1,8 @@
 .header {
-  background: "#1890ff";
+  background: #1890ff !important;
 }
 
 .title {
-  text-align: "left";
-  color: "#ffffff";
+  text-align: left;
+  color: #fff !important;
 }
