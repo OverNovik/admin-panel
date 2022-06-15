@@ -8,10 +8,10 @@ const AlbumsPage: React.FC = () => {
 
   return (
     <>
+      <AlbumsTable />
       <Button type="primary" onClick={() => navigate("/albums/create")}>
         Create
       </Button>
-      <AlbumsTable />
     </>
   );
 };

@@ -3,7 +3,13 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Layout } from "antd";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Footer, Header } from "./components";
-import { AlbumsPage, CreateAlbumsPage, LoginPage, NotFoundPage } from "./pages";
+import {
+  AlbumsPage,
+  CreateAlbumsPage,
+  EditPage,
+  LoginPage,
+  NotFoundPage,
+} from "./pages";
 import { AuthProvider, PrivateRoute } from "./utils";
 import styles from "./style.module.css";
 
@@ -32,6 +38,7 @@ const App: React.FC = () => {
                   }
                 />
                 <Route path="/albums/create" element={<CreateAlbumsPage />} />
+                <Route path="/albums/edit" element={<EditPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

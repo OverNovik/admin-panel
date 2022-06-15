@@ -1,12 +1,14 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
+import { useNavigate } from "react-router-dom";
 import { Spinner } from "app/components";
 import { operations, Types } from "./duck";
 
 const { Column } = Table;
 
 const AlbumsTable: React.FC = () => {
+  const navigation = useNavigate();
   const { data, loading } = useQuery<
     Types.GetAlbumsQuery,
     Types.GetAlbumsQueryVariables
@@ -49,7 +51,11 @@ const AlbumsTable: React.FC = () => {
               <Button size="small" type="link">
                 Show
               </Button>
-              <Button size="small" type="link">
+              <Button
+                size="small"
+                type="link"
+                onClick={() => navigation("/albums/edit")}
+              >
                 Edit
               </Button>
               <Button size="small" type="link">
