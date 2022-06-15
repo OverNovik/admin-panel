@@ -6,15 +6,15 @@ interface Props {
   children: ReactElement;
 }
 
-const PrivateRoute: React.FC<Props> = ({ children }) => {
+const PublicRoute: React.FC<Props> = ({ children }) => {
   const auth: any = useAuth();
   const location = useLocation();
 
   return auth.loggedIn ? (
-    children
+    <Navigate to="/" state={{ from: location }} />
   ) : (
-    <Navigate to="/login" state={{ from: location }} />
+    children
   );
 };
 
-export default PrivateRoute;
+export default PublicRoute;

@@ -10,7 +10,7 @@ import {
   LoginPage,
   NotFoundPage,
 } from "./pages";
-import { AuthProvider, PrivateRoute } from "./utils";
+import { AuthProvider, PrivateRoute, PublicRoute } from "./utils";
 import styles from "./style.module.css";
 
 const { Content } = Layout;
@@ -37,9 +37,30 @@ const App: React.FC = () => {
                     </PrivateRoute>
                   }
                 />
-                <Route path="/albums/create" element={<CreateAlbumsPage />} />
-                <Route path="/albums/edit" element={<EditPage />} />
-                <Route path="/login" element={<LoginPage />} />
+                <Route
+                  path="/albums/create"
+                  element={
+                    <PrivateRoute>
+                      <CreateAlbumsPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/albums/edit"
+                  element={
+                    <PrivateRoute>
+                      <EditPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <PublicRoute>
+                      <LoginPage />
+                    </PublicRoute>
+                  }
+                />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </BrowserRouter>

@@ -9,7 +9,7 @@ const NotFoundPage: React.FC = () => (
     subTitle="Sorry, the page you visited does not exist."
     extra={
       <Button type="primary">
-        <Link to="/">Back Home</Link>
+        <Link to="/login">Back Home</Link>
       </Button>
     }
   />
