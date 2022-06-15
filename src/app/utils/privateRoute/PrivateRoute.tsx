@@ -13,7 +13,7 @@ const PrivateRoute: React.FC<Props> = ({ children }) => {
   return auth.loggedIn ? (
     children
   ) : (
-    <Navigate to="/login" state={{ from: location }} />
+    <Navigate to="/albums" state={{ from: location }} />
   );
 };
 

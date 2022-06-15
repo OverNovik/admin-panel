@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 const LoginPage: React.FC = () => (
   <>
-    <Title>Login</Title>
+    <Title>Log in</Title>
     <LoginForm />
   </>
 );

@@ -21,7 +21,7 @@ const LoginForm: React.FC = () => {
     console.log(2222, values);
     console.log(3333, loading);
     auth.logIn(new Date().toString());
-    navigate("/");
+    navigate("/albums");
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -1,8 +1,14 @@
 .header {
   background: #1890ff !important;
+  display: flex;
+  justify-content: space-between;
 }
 
 .title {
   text-align: left;
   color: #fff !important;
+}
+
+.logout {
+  justify-content: right;
 }
