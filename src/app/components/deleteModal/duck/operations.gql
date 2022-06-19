@@ -1,0 +1,3 @@
+mutation deleteAlbum($id: ID!) {
+  deleteAlbum(id: $id)
+}

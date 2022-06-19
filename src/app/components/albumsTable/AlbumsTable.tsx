@@ -3,12 +3,15 @@ import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "app/components";
+import DeleteModal from "../deleteModal";
 import { operations, Types } from "./duck";
+// import styles from "./style.module.css";
 
 const { Column } = Table;
 
 const AlbumsTable: React.FC = () => {
   const navigation = useNavigate();
+
   const { data, loading } = useQuery<
     Types.GetAlbumsQuery,
     Types.GetAlbumsQueryVariables
@@ -23,6 +26,9 @@ const AlbumsTable: React.FC = () => {
       key: item?.id,
     };
   });
+
+  // eslint-disable-next-line no-console
+  console.log(dataItems);
 
   if (!data || loading) {
     return <Spinner />;
@@ -46,9 +52,14 @@ const AlbumsTable: React.FC = () => {
           key="numPhotos"
         />
         <Column
-          render={() => (
+          // eslint-disable-next-line @typescript-eslint/no-shadow
+          render={(_: any, data: any) => (
             <Space size="small">
-              <Button size="small" type="link">
+              <Button
+                size="small"
+                type="link"
+                onClick={() => navigation("/albums/show")}
+              >
                 Show
               </Button>
               <Button
@@ -58,9 +69,7 @@ const AlbumsTable: React.FC = () => {
               >
                 Edit
               </Button>
-              <Button size="small" type="link">
-                Delete
-              </Button>
+              <DeleteModal id={data.id} />
             </Space>
           )}
         />
