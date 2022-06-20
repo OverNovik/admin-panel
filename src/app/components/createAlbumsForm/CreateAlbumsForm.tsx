@@ -1,18 +1,55 @@
 /* eslint-disable no-console */
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { useMutation, useQuery } from "@apollo/client";
+import { Button, Form, Input, Select } from "antd";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../spinner";
+import { operations, Types } from "./duck";
+import styles from "./style.module.css";
+
+const { Option } = Select;
 
 const CreateAlbumsForm: React.FC = () => {
   const navigate = useNavigate();
 
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const { data, loading: userInfoLoading } = useQuery<
+    Types.GetUsersQuery,
+    Types.GetUsersQueryVariables
+  >(operations.getUsers);
+
+  console.log(data);
+
+  const [createAlbum, { loading: createLoading }] = useMutation<
+    Types.CreateAlbumMutation,
+    Types.CreateAlbumMutationVariables
+  >(operations.createAlbum);
+
+  console.log(createLoading);
+
+  const onFinish = async (values: any) => {
+    console.log(values);
+    await createAlbum({
+      variables: {
+        input: {
+          title: values.title,
+          userId: values.user,
+        },
+      },
+    });
+    navigate("/albums");
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
+
+  if (!data || userInfoLoading || createLoading) {
+    return <Spinner />;
+  }
+
+  const options = data.users?.data?.map((d) => (
+    <Option key={d?.id}>{d?.username}</Option>
+  ));
 
   return (
     <Form
@@ -23,6 +60,7 @@ const CreateAlbumsForm: React.FC = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      className={styles.create}
     >
       <Form.Item
         label="Title"
@@ -37,7 +75,16 @@ const CreateAlbumsForm: React.FC = () => {
         name="user"
         rules={[{ required: true, message: "Please input your User!" }]}
       >
-        <Input />
+        <Select
+          showSearch
+          placeholder="Users"
+          defaultActiveFirstOption={false}
+          showArrow={false}
+          filterOption={false}
+          notFoundContent={null}
+        >
+          {options}
+        </Select>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

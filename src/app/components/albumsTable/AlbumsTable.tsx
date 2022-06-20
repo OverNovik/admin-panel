@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Spinner } from "app/components";
 import DeleteModal from "../deleteModal";
 import { operations, Types } from "./duck";
-// import styles from "./style.module.css";
+import styles from "./style.module.css";
 
 const { Column } = Table;
 
@@ -37,6 +37,7 @@ const AlbumsTable: React.FC = () => {
   return (
     <>
       <Table
+        className={styles.table}
         size="small"
         dataSource={dataItems}
         pagination={{

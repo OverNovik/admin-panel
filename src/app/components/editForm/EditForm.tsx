@@ -2,6 +2,7 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
+import styles from "./style.module.css";
 
 const EditForm: React.FC = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const EditForm: React.FC = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      className={styles.edit}
     >
       <Form.Item
         label="Title"

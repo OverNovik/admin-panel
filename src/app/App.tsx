@@ -9,6 +9,7 @@ import {
   EditPage,
   LoginPage,
   NotFoundPage,
+  ShowPage,
 } from "./pages";
 import { AuthProvider, PrivateRoute, PublicRoute } from "./utils";
 import styles from "./style.module.css";
@@ -42,6 +43,14 @@ const App: React.FC = () => {
                   element={
                     <PrivateRoute>
                       <CreateAlbumsPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/albums/show"
+                  element={
+                    <PrivateRoute>
+                      <ShowPage />
                     </PrivateRoute>
                   }
                 />

@@ -1,25 +1,16 @@
 /* eslint-disable no-console */
 import * as React from "react";
-import { useQuery } from "@apollo/client";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "app/utils";
-import { Spinner } from "..";
-import { operations, Types } from "./duck";
+import styles from "./style.module.css";
 
 const LoginForm: React.FC = () => {
   const auth: any = useAuth();
   const navigate = useNavigate();
 
-  const { data, loading } = useQuery<
-    Types.GetUsersQuery,
-    Types.GetUsersQueryVariables
-  >(operations.getUsers);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onFinish = (values: any) => {
-    console.log(1111, data);
-    console.log(2222, values);
-    console.log(3333, loading);
     auth.logIn(new Date().toString());
     navigate("/albums");
   };
@@ -28,19 +19,17 @@ const LoginForm: React.FC = () => {
     console.log("Failed:", errorInfo);
   };
 
-  if (!data || loading) {
-    return <Spinner />;
-  }
-
   return (
     <Form
+      size="large"
       name="basic"
       labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
+      wrapperCol={{ sm: 24 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      className={styles.login}
     >
       <Form.Item
         label="Email"
