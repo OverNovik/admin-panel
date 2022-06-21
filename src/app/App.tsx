@@ -47,7 +47,7 @@ const App: React.FC = () => {
                   }
                 />
                 <Route
-                  path="/albums/show"
+                  path="/albums/:id"
                   element={
                     <PrivateRoute>
                       <ShowPage />
@@ -55,7 +55,7 @@ const App: React.FC = () => {
                   }
                 />
                 <Route
-                  path="/albums/edit"
+                  path="/albums/:id/edit"
                   element={
                     <PrivateRoute>
                       <EditPage />

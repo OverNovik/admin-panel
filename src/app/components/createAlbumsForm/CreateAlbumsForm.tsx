@@ -9,6 +9,11 @@ import styles from "./style.module.css";
 
 const { Option } = Select;
 
+interface Values {
+  title: string;
+  user: string;
+}
+
 const CreateAlbumsForm: React.FC = () => {
   const navigate = useNavigate();
 
@@ -17,17 +22,12 @@ const CreateAlbumsForm: React.FC = () => {
     Types.GetUsersQueryVariables
   >(operations.getUsers);
 
-  console.log(data);
-
   const [createAlbum, { loading: createLoading }] = useMutation<
     Types.CreateAlbumMutation,
     Types.CreateAlbumMutationVariables
   >(operations.createAlbum);
 
-  console.log(createLoading);
-
-  const onFinish = async (values: any) => {
-    console.log(values);
+  const onFinish = async (values: Values) => {
     await createAlbum({
       variables: {
         input: {
@@ -36,7 +36,7 @@ const CreateAlbumsForm: React.FC = () => {
         },
       },
     });
-    navigate("/albums");
+    navigate(-1);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -91,7 +91,7 @@ const CreateAlbumsForm: React.FC = () => {
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
-        <Button type="link" onClick={() => navigate("/albums")}>
+        <Button type="link" onClick={() => navigate(-1)}>
           Cancel
         </Button>
       </Form.Item>

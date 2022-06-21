@@ -59,14 +59,14 @@ const AlbumsTable: React.FC = () => {
               <Button
                 size="small"
                 type="link"
-                onClick={() => navigation("/albums/show")}
+                onClick={() => navigation(`/albums/${data.id}`)}
               >
                 Show
               </Button>
               <Button
                 size="small"
                 type="link"
-                onClick={() => navigation("/albums/edit")}
+                onClick={() => navigation(`/albums/${data.id}/edit`)}
               >
                 Edit
               </Button>

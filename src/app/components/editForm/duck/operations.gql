@@ -1,0 +1,27 @@
+mutation updateAlbum($input: UpdateAlbumInput!, $id: ID!) {
+  updateAlbum(input: $input, id: $id) {
+    id
+    title
+  }
+}
+
+query getAlbum($id: ID!) {
+  album(id: $id) {
+    id
+    title
+    user {
+      id
+      name
+    }
+  }
+}
+
+query getUsersSelect {
+  users {
+    data {
+      id
+      email
+      username
+    }
+  }
+}
