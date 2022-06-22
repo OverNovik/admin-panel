@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Button, Space, Table, Tabs, Typography } from "antd";
-import { useParams } from "react-router-dom";
+import { Button, Image, Space, Table, Tabs, Typography } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "app/components";
 import { operations, Types } from "./duck";
 import styles from "./ShowPage.module.css";
@@ -12,6 +12,7 @@ const { Column } = Table;
 
 const ShowPage: React.FC = () => {
   const { id = "" } = useParams();
+  const navigation = useNavigate();
 
   const { data, loading } = useQuery<
     Types.GetAlbumInfoQuery,
@@ -22,42 +23,66 @@ const ShowPage: React.FC = () => {
     },
   });
 
-  if (!data || loading) {
+  const { data: photoInfo, loading: photoInfoLoading } = useQuery<
+    Types.GetPhotoInfoQuery,
+    Types.GetPhotoInfoQueryVariables
+  >(operations.getPhotoInfo, {
+    variables: {
+      id,
+    },
+  });
+
+  const photoItem = [photoInfo].map((item) => {
+    return {
+      id: item?.photo?.id,
+      title: item?.photo?.title,
+      preview: item?.photo?.url,
+      key: item?.photo?.id,
+    };
+  });
+
+  if (!data || loading || !photoInfo || photoInfoLoading) {
     return <Spinner />;
   }
 
   return (
-    <Tabs className={styles.tabs} defaultActiveKey="1" centered>
-      <TabPane tab="Basic" key="1">
-        <Text strong>Name: {data.album?.user?.name}</Text>
-        <br />
-        <Text strong>Username: {data.album?.user?.username}</Text>
-      </TabPane>
-      <TabPane tab="Photos" key="2">
-        <Table
-          className={styles.table}
-          size="small"
-          // dataSource={}
-        >
-          <Column title="ID" dataIndex="id" key="id" />
-          <Column title="Title" dataIndex="title" key="title" />
-          <Column title="Preview" dataIndex="preview" key="preview" />
-          <Column
-            title="Actions"
-            dataIndex="actions"
-            key="actions"
-            // eslint-disable-next-line @typescript-eslint/no-shadow
-            render={() => (
-              <Space size="small">
-                <Button size="small" type="link">
-                  Show
-                </Button>
-              </Space>
-            )}
-          />
-        </Table>
-      </TabPane>
-    </Tabs>
+    <>
+      <Button type="primary" onClick={() => navigation(-1)}>
+        Back
+      </Button>
+      <Tabs className={styles.tabs} defaultActiveKey="1" centered>
+        <TabPane tab="Basic" key="1">
+          <Text strong>Name: {data.album?.user?.name}</Text>
+          <br />
+          <Text strong>Username: {data.album?.user?.username}</Text>
+        </TabPane>
+        <TabPane tab="Photos" key="2">
+          <Table size="large" dataSource={photoItem} pagination={false}>
+            <Column title="ID" dataIndex="id" key="id" />
+            <Column title="Title" dataIndex="title" key="title" />
+            <Column
+              title="Preview"
+              dataIndex="preview"
+              key="preview"
+              render={(dataIndex) => <Image width={200} src={dataIndex} />}
+            />
+            <Column
+              title="Actions"
+              dataIndex="actions"
+              key="actions"
+              // eslint-disable-next-line @typescript-eslint/no-shadow
+              render={() => (
+                <Space size="large">
+                  <Button size="large" type="link">
+                    Show
+                  </Button>
+                </Space>
+              )}
+            />
+          </Table>
+        </TabPane>
+      </Tabs>
+    </>
   );
 };
 
