@@ -16,8 +16,6 @@ const DeleteModal: React.FC<Props> = ({ id }) => {
   >(operations.deleteAlbum);
 
   const showModal = () => {
-    // eslint-disable-next-line no-console
-    console.log(id);
     setIsModalVisible(true);
   };
 

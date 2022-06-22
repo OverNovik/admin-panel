@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Button, Form, Input, Select } from "antd";
@@ -39,10 +38,6 @@ const CreateAlbumsForm: React.FC = () => {
     navigate(-1);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
   if (!data || userInfoLoading || createLoading) {
     return <Spinner />;
   }
@@ -58,7 +53,6 @@ const CreateAlbumsForm: React.FC = () => {
       wrapperCol={{ span: 30 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
       className={styles.create}
     >

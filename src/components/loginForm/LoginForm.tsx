@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import * as React from "react";
 import { Button, Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -9,14 +8,9 @@ const LoginForm: React.FC = () => {
   const auth: any = useAuth();
   const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onFinish = (values: any) => {
+  const onFinish = () => {
     auth.logIn(new Date().toString());
     navigate("/albums");
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -27,7 +21,6 @@ const LoginForm: React.FC = () => {
       wrapperCol={{ sm: 24 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
       className={styles.login}
     >

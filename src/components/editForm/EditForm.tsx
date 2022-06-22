@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Button, Form, Input, Select } from "antd";
@@ -50,10 +49,6 @@ const EditForm: React.FC = () => {
     navigate(-1);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
   if (!userData || loading || userInfoLoading || albumInfoLoading) {
     return <Spinner />;
   }
@@ -72,7 +67,6 @@ const EditForm: React.FC = () => {
         user: data?.album?.user?.id,
       }}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
       className={styles.edit}
     >
