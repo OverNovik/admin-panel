@@ -3,8 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateInput: React.FC = () => {
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
-  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
+  const [startDate, setStartDate] = useState<
+    React.SetStateAction<Date | undefined>
+  >(new Date());
+  const [endDate, setEndDate] = useState<
+    React.SetStateAction<Date | undefined>
+  >(new Date());
   return (
     <>
       <DatePicker
