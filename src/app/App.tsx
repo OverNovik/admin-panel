@@ -2,7 +2,7 @@ import React from "react";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Layout } from "antd";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Footer, Header } from "./components";
+import { Footer, Header } from "../components";
 import {
   AlbumsPage,
   CreateAlbumsPage,
@@ -11,9 +11,9 @@ import {
   NotFoundPage,
   PhotoInfoPage,
   ShowPage,
-} from "./pages";
-import { AuthProvider, PrivateRoute, PublicRoute } from "./utils";
-import styles from "./style.module.css";
+} from "../pages";
+import { AuthProvider, PrivateRoute, PublicRoute } from "../utils";
+import styles from "./App.module.css";
 
 const { Content } = Layout;
 
