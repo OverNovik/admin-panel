@@ -17,3 +17,4 @@ declare module "*/operations.gql" {
   export default defaultDocument;
 }
 declare module "*.css";
+declare module "react-datepicker";
