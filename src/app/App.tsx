@@ -9,6 +9,7 @@ import {
   EditPage,
   LoginPage,
   NotFoundPage,
+  PhotoInfoPage,
   ShowPage,
 } from "./pages";
 import { AuthProvider, PrivateRoute, PublicRoute } from "./utils";
@@ -59,6 +60,14 @@ const App: React.FC = () => {
                   element={
                     <PrivateRoute>
                       <EditPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/albums/:id/photos/:id"
+                  element={
+                    <PrivateRoute>
+                      <PhotoInfoPage />
                     </PrivateRoute>
                   }
                 />

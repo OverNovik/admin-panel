@@ -18,14 +18,6 @@ export type GetPhotosInfoQuery = {
   >;
 };
 
-export type GetPhotoInfoQueryVariables = Types.Exact<{
-  id: Types.Scalars["ID"];
-}>;
-
-export type GetPhotoInfoQuery = {
-  photo?: Types.Maybe<Pick<Types.Photo, "id" | "title" | "url">>;
-};
-
 export type GetAlbumInfoQueryVariables = Types.Exact<{
   id: Types.Scalars["ID"];
 }>;
