@@ -10,6 +10,9 @@ declare module "*/operations.gql" {
   export const updateAlbum: DocumentNode;
   export const getAlbum: DocumentNode;
   export const getUsersSelect: DocumentNode;
+  export const getPhotosInfo: DocumentNode;
+  export const getPhotoInfo: DocumentNode;
+  export const getAlbumInfo: DocumentNode;
 
   export default defaultDocument;
 }

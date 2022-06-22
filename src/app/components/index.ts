@@ -7,4 +7,3 @@ export { default as AlbumsTable } from "./albumsTable";
 export { default as EditForm } from "./editForm";
 export { default as DeleteModal } from "./deleteModal";
 export { default as DateInput } from "./dateInput";
-export { default as TabsComponent } from "./tabs";

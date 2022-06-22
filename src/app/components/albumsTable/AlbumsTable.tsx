@@ -27,9 +27,6 @@ const AlbumsTable: React.FC = () => {
     };
   });
 
-  // eslint-disable-next-line no-console
-  console.log(dataItems);
-
   if (!data || loading) {
     return <Spinner />;
   }
