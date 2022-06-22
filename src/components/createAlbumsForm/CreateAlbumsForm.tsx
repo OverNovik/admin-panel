@@ -65,7 +65,12 @@ const CreateAlbumsForm: React.FC = () => {
       <Form.Item
         label="Title"
         name="title"
-        rules={[{ required: true, message: "Please input your Title!" }]}
+        rules={[
+          { min: 3 },
+          { max: 64 },
+          { type: "string" },
+          { required: true, message: "Please input your Title!" },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -73,7 +78,10 @@ const CreateAlbumsForm: React.FC = () => {
       <Form.Item
         label="User"
         name="user"
-        rules={[{ required: true, message: "Please input your User!" }]}
+        rules={[
+          { type: "string" },
+          { required: true, message: "Please input your User!" },
+        ]}
       >
         <Select
           showSearch
