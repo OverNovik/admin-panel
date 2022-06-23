@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Spinner, DeleteModal } from "../../components";
 import { operations, Types } from "./duck";
 
@@ -17,6 +17,14 @@ interface Data {
 
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
+  const [, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setSearchParams({
+      page: "1",
+      size: "10",
+    });
+  }, [setSearchParams]);
 
   const { data, loading } = useQuery<
     Types.GetAlbumsQuery,
@@ -43,6 +51,12 @@ const AlbumsPage: React.FC = () => {
         size="small"
         dataSource={dataItems}
         pagination={{
+          onChange(page, pageSize) {
+            setSearchParams({
+              page: page.toString(),
+              size: pageSize.toString(),
+            });
+          },
           pageSizeOptions: [10, 20, 50],
         }}
         scroll={{ y: 510 }}

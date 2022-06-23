@@ -1,6 +1,6 @@
 # Project Deploy
 
-[ADMIN-PANEL](https://admin-panel-3950uc1lf-overnovik.vercel.app/login)
+[ADMIN-PANEL](https://admin-panel-overnovik.vercel.app/login)
 
 # Getting Started with Create React App
 
