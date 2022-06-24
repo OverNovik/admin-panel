@@ -4,7 +4,7 @@ import { useAuth } from "hooks";
 import { PrivateRouteProps } from "./types";
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
-  const auth: any = useAuth();
+  const auth = useAuth();
   const location = useLocation();
 
   return auth.loggedIn ? (
