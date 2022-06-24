@@ -73,10 +73,9 @@ const ShowPage: React.FC = () => {
             />
             <Column
               title="Actions"
-              dataIndex="actions"
               key="actions"
               // eslint-disable-next-line @typescript-eslint/no-shadow
-              render={(_: any, data: Types.Data) => (
+              render={(data: Types.Data) => (
                 <Space size="large">
                   <Button
                     size="large"
