@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Result } from "antd";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../utils";
+import { useAuth } from "hooks";
 
 const NotFoundPage: React.FC = () => {
-  const auth: any = useAuth();
+  const auth = useAuth();
 
   return (
     <Result

@@ -1,12 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Card, Image } from "antd";
-import {
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import * as Route from "react-router-dom";
 import { Spinner } from "../../components";
 import { operations, Types } from "./duck";
 import styles from "./PhotosInfoPage.module.css";
@@ -14,9 +9,9 @@ import styles from "./PhotosInfoPage.module.css";
 const { Meta } = Card;
 
 const PhotoInfoPage: React.FC = () => {
-  const { id = "" } = useParams();
-  const navigation = useNavigate();
-  const location = useLocation();
+  const { id = "" } = Route.useParams();
+  const navigation = Route.useNavigate();
+  const location = Route.useLocation();
 
   const { data, loading } = useQuery<
     Types.GetPhotoInfoQuery,
@@ -32,7 +27,7 @@ const PhotoInfoPage: React.FC = () => {
   }
 
   if (!loading && !data.photo?.id) {
-    return <Navigate to="*" state={{ from: location }} />;
+    return <Route.Navigate to="*" state={{ from: location }} />;
   }
 
   return (

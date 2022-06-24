@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
-import { CreateAlbumsForm } from "../../components";
+import { CreateAlbumsForm } from "./components";
 
 const { Title } = Typography;
 

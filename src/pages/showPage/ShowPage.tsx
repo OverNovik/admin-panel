@@ -10,13 +10,6 @@ const { TabPane } = Tabs;
 const { Text } = Typography;
 const { Column } = Table;
 
-interface Data {
-  id: string;
-  title: string;
-  preview: string;
-  key: string;
-}
-
 const ShowPage: React.FC = () => {
   const { id = "" } = useParams();
   const navigation = useNavigate();
@@ -83,7 +76,7 @@ const ShowPage: React.FC = () => {
               dataIndex="actions"
               key="actions"
               // eslint-disable-next-line @typescript-eslint/no-shadow
-              render={(_: any, data: Data) => (
+              render={(_: any, data: Types.Data) => (
                 <Space size="large">
                   <Button
                     size="large"

@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
-import { LoginForm } from "../../components";
+import { LoginForm } from "./components";
 
 const { Title } = Typography;
 

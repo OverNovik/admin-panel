@@ -2,18 +2,11 @@ import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Spinner, DeleteModal } from "../../components";
+import { Spinner } from "components";
+import { DeleteModal } from "./components";
 import { operations, Types } from "./duck";
 
 const { Column } = Table;
-
-interface Data {
-  id: string;
-  key: string;
-  numPhotos: number;
-  title: string;
-  username: string;
-}
 
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
@@ -71,7 +64,7 @@ const AlbumsPage: React.FC = () => {
         />
         <Column
           // eslint-disable-next-line @typescript-eslint/no-shadow
-          render={(_: any, data: Data) => (
+          render={(data: Types.Data) => (
             <Space size="small">
               <Button
                 size="small"
