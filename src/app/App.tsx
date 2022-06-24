@@ -3,15 +3,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { Layout } from "antd";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Footer, Header } from "../components";
-import {
-  AlbumsPage,
-  CreateAlbumsPage,
-  EditPage,
-  LoginPage,
-  NotFoundPage,
-  PhotoInfoPage,
-  ShowPage,
-} from "../pages";
+import * as Pages from "../pages";
 import { AuthProvider, PrivateRoute, PublicRoute } from "../utils";
 import styles from "./App.module.css";
 
@@ -35,7 +27,7 @@ const App: React.FC = () => {
                   path="/albums"
                   element={
                     <PrivateRoute>
-                      <AlbumsPage />
+                      <Pages.AlbumsPage />
                     </PrivateRoute>
                   }
                 />
@@ -43,7 +35,7 @@ const App: React.FC = () => {
                   path="/albums/create"
                   element={
                     <PrivateRoute>
-                      <CreateAlbumsPage />
+                      <Pages.CreateAlbumsPage />
                     </PrivateRoute>
                   }
                 />
@@ -51,7 +43,7 @@ const App: React.FC = () => {
                   path="/albums/:id"
                   element={
                     <PrivateRoute>
-                      <ShowPage />
+                      <Pages.ShowPage />
                     </PrivateRoute>
                   }
                 />
@@ -59,7 +51,7 @@ const App: React.FC = () => {
                   path="/albums/:id/edit"
                   element={
                     <PrivateRoute>
-                      <EditPage />
+                      <Pages.EditPage />
                     </PrivateRoute>
                   }
                 />
@@ -67,7 +59,7 @@ const App: React.FC = () => {
                   path="/albums/:id/photos/:id"
                   element={
                     <PrivateRoute>
-                      <PhotoInfoPage />
+                      <Pages.PhotoInfoPage />
                     </PrivateRoute>
                   }
                 />
@@ -75,11 +67,11 @@ const App: React.FC = () => {
                   path="/login"
                   element={
                     <PublicRoute>
-                      <LoginPage />
+                      <Pages.LoginPage />
                     </PublicRoute>
                   }
                 />
-                <Route path="*" element={<NotFoundPage />} />
+                <Route path="*" element={<Pages.NotFoundPage />} />
               </Routes>
             </BrowserRouter>
           </Content>
