@@ -10,8 +10,8 @@ const App: React.FC = () => {
   return (
     <ApolloProvider client={client}>
       <AuthProvider>
-        <Header />
         <Layout className={styles.layout}>
+          <Header />
           <Main />
           <Footer />
         </Layout>
