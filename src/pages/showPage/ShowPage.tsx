@@ -32,14 +32,15 @@ const ShowPage: React.FC = () => {
     },
   });
 
-  const photoItem = photos?.album?.photos?.data?.map((item) => {
-    return {
-      id: item?.id,
-      title: item?.title,
-      preview: item?.thumbnailUrl,
-      key: item?.id,
-    };
-  });
+  const photoItem: Types.PhotoItem[] | undefined =
+    photos?.album?.photos?.data?.map((item) => {
+      return {
+        id: item?.id,
+        title: item?.title,
+        preview: item?.thumbnailUrl,
+        key: item?.id,
+      };
+    });
 
   if (!data || loading || !photos || photosLoading) {
     return <Spinner />;
@@ -74,13 +75,12 @@ const ShowPage: React.FC = () => {
             <Column
               title="Actions"
               key="actions"
-              // eslint-disable-next-line @typescript-eslint/no-shadow
-              render={(data: Types.Data) => (
+              render={(item: Types.Data) => (
                 <Space size="large">
                   <Button
                     size="large"
                     type="link"
-                    onClick={() => navigation(`photos/${data.id}`)}
+                    onClick={() => navigation(`photos/${item.id}`)}
                   >
                     Show
                   </Button>

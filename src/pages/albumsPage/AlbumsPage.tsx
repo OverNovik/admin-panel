@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
@@ -17,22 +18,24 @@ const AlbumsPage: React.FC = () => {
       page: "1",
       size: "10",
     });
-  }, [setSearchParams]);
+  }, []);
 
   const { data, loading } = useQuery<
     Types.GetAlbumsQuery,
     Types.GetAlbumsQueryVariables
   >(operations.getAlbums);
 
-  const dataItems = data?.albums?.data?.map((item) => {
-    return {
-      id: item?.id,
-      title: item?.title,
-      username: item?.user?.name,
-      numPhotos: item?.photos?.data?.length,
-      key: item?.id,
-    };
-  });
+  const dataItems: Types.DataItems[] | undefined = data?.albums?.data?.map(
+    (item) => {
+      return {
+        id: item?.id,
+        title: item?.title,
+        username: item?.user?.name,
+        photos: item?.photos?.data?.length,
+        key: item?.id,
+      };
+    }
+  );
 
   if (!data || loading) {
     return <Spinner />;
@@ -57,30 +60,25 @@ const AlbumsPage: React.FC = () => {
         <Column title="ID" dataIndex="id" key="id" />
         <Column title="Title" dataIndex="title" key="title" />
         <Column title="User name" dataIndex="username" key="username" />
+        <Column title="Number of photos" dataIndex="photos" key="photos" />
         <Column
-          title="Number of photos"
-          dataIndex="numPhotos"
-          key="numPhotos"
-        />
-        <Column
-          // eslint-disable-next-line @typescript-eslint/no-shadow
-          render={(data: Types.Data) => (
+          render={(item: Types.Data) => (
             <Space size="small">
               <Button
                 size="small"
                 type="link"
-                onClick={() => navigation(`/albums/${data.id}`)}
+                onClick={() => navigation(`/albums/${item.id}`)}
               >
                 Show
               </Button>
               <Button
                 size="small"
                 type="link"
-                onClick={() => navigation(`/albums/${data.id}/edit`)}
+                onClick={() => navigation(`/albums/${item.id}/edit`)}
               >
                 Edit
               </Button>
-              <DeleteModal id={data.id} />
+              <DeleteModal id={item.id} />
             </Space>
           )}
         />

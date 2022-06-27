@@ -1,25 +1,19 @@
 import React, { useState } from "react";
-import { AuthContext } from "contexts";
-import { localStorageService } from "../../utils";
-import { AuthProviderProps } from "./types";
+import { AuthContext } from "..";
+import { Types, Const } from "./duck";
 
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+const AuthProvider: React.FC<Types.AuthProviderProps> = ({ children }) => {
+  const [loggedIn, setLoggedIn] = useState(
+    !!localStorage.getItem(Const.FAKE_TOKEN)
+  );
 
-  const token = localStorageService.getToken();
-
-  if (loggedIn !== !!token) {
-    setLoggedIn(!!token);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-shadow
   const logIn = (token: string) => {
-    localStorageService.setToken(token);
+    localStorage.setItem(Const.FAKE_TOKEN, token);
     setLoggedIn(true);
   };
 
   const logOut = () => {
-    localStorageService.removeToken();
+    localStorage.removeItem(Const.FAKE_TOKEN);
     setLoggedIn(false);
   };
 
@@ -29,7 +23,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         loggedIn,
         logIn,
         logOut,
-        token,
       }}
     >
       {children}
