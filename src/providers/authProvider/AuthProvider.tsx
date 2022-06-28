@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AuthContext } from "..";
+import AuthContext from "./authContext";
 import { Types, Const } from "./duck";
 
 const AuthProvider: React.FC<Types.AuthProviderProps> = ({ children }) => {
