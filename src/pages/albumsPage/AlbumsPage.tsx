@@ -12,8 +12,10 @@ const { Column } = Table;
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageParams = searchParams.get("page");
-  const sizeParams = searchParams.get("size");
+  const pageParams =
+    Number(searchParams.get("page")) < 0 ? "1" : searchParams.get("page");
+  const sizeParams =
+    Number(searchParams.get("size")) < 0 ? "10" : searchParams.get("size");
 
   useEffect(() => {
     setSearchParams({
