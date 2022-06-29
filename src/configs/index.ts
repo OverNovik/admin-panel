@@ -1,8 +1,8 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
-const client = new ApolloClient({
+const config = new ApolloClient({
   uri: process.env.REACT_APP_API_URL,
   cache: new InMemoryCache(),
 });
 
-export default client;
+export default config;

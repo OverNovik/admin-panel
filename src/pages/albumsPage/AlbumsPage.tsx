@@ -11,14 +11,14 @@ const { Column } = Table;
 
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    setSearchParams({
-      page: "1",
-      size: "10",
-    });
-  }, []);
+  const paginate: Record<string, string | string[]> = {
+    page: searchParams.get("page") || "1",
+    size: searchParams.get("size") || "10",
+  };
+
+  useEffect(() => setSearchParams(paginate), []);
 
   const { data, loading } = useQuery<
     Types.GetAlbumsQuery,
@@ -31,7 +31,7 @@ const AlbumsPage: React.FC = () => {
         id: item?.id,
         title: item?.title,
         username: item?.user?.name,
-        photos: item?.photos?.data?.length,
+        currPhotos: item?.photos?.data?.length,
         key: item?.id,
       };
     }
@@ -53,6 +53,12 @@ const AlbumsPage: React.FC = () => {
               size: pageSize.toString(),
             });
           },
+          current: searchParams.get("page")
+            ? Number(searchParams.get("page"))
+            : 1,
+          pageSize: searchParams.get("size")
+            ? Number(searchParams.get("size"))
+            : 10,
           pageSizeOptions: [10, 20, 50],
         }}
         scroll={{ y: 510 }}
@@ -60,7 +66,11 @@ const AlbumsPage: React.FC = () => {
         <Column title="ID" dataIndex="id" key="id" />
         <Column title="Title" dataIndex="title" key="title" />
         <Column title="User name" dataIndex="username" key="username" />
-        <Column title="Number of photos" dataIndex="photos" key="photos" />
+        <Column
+          title="Number of photos"
+          dataIndex="currPhotos"
+          key="currPhotos"
+        />
         <Column
           render={(item: Types.Data) => (
             <Space size="small">

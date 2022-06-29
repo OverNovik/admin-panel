@@ -4,7 +4,7 @@ export * from "./operations.generated";
 export interface DataItems {
   id: Maybe<string> | undefined;
   key: Maybe<string> | undefined;
-  photos: number | undefined;
+  currPhotos: number | undefined;
   title: Maybe<string> | undefined;
   username: Maybe<string> | undefined;
 }
