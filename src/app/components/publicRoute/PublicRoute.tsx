@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "hooks";
-import { PublicRouteProps } from "./types";
+import { Types } from "./duck";
 
-const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
+const PublicRoute: React.FC<Types.PublicRouteProps> = ({ children }) => {
   const auth = useAuth();
   const location = useLocation();
 

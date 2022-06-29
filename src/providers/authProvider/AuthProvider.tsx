@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import AuthContext from "./authContext";
-import { Types, Const } from "./duck";
+import { Types, сonsts } from "./duck";
 
 const AuthProvider: React.FC<Types.AuthProviderProps> = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(
-    !!localStorage.getItem(Const.FAKE_TOKEN)
+    !!localStorage.getItem(сonsts.FAKE_TOKEN)
   );
 
   const logIn = (token: string) => {
-    localStorage.setItem(Const.FAKE_TOKEN, token);
+    localStorage.setItem(сonsts.FAKE_TOKEN, token);
     setLoggedIn(true);
   };
 
   const logOut = () => {
-    localStorage.removeItem(Const.FAKE_TOKEN);
+    localStorage.removeItem(сonsts.FAKE_TOKEN);
     setLoggedIn(false);
   };
 

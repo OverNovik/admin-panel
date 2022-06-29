@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Image, Space, Table, Tabs, Typography } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
-import { Spinner } from "../../components";
+import { Spinner } from "components";
 import { operations, Types } from "./duck";
 import styles from "./ShowPage.module.css";
 

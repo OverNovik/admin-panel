@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { CalendarOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Layout, Typography } from "antd";
+import { DateInput } from "components";
 import { useAuth } from "hooks";
-import { DateInput } from "../../../components";
 import styles from "./Header.module.css";
 
-const { Header: UIHeader } = Layout;
 const { Title } = Typography;
 
-const Header: React.FC = () => {
+const AppHeader: React.FC = () => {
   const auth = useAuth();
   const [isVisible, setVisible] = useState(false);
 
   return (
-    <UIHeader className={styles.header}>
+    <Layout.Header className={styles.header}>
       <Title level={2} className={styles.title}>
         Admin-panel
       </Title>
@@ -34,8 +33,8 @@ const Header: React.FC = () => {
           </Button>
         </>
       ) : null}
-    </UIHeader>
+    </Layout.Header>
   );
 };
 
-export default Header;
+export default AppHeader;

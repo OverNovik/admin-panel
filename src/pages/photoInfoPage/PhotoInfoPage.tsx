@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Card, Image } from "antd";
 import * as Route from "react-router-dom";
-import { Spinner } from "../../components";
+import { Spinner } from "components";
 import { operations, Types } from "./duck";
 import styles from "./PhotosInfoPage.module.css";
 

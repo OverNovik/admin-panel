@@ -12,13 +12,15 @@ const { Column } = Table;
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const pageParams = searchParams.get("page");
+  const sizeParams = searchParams.get("size");
 
-  const paginate: Record<string, string | string[]> = {
-    page: searchParams.get("page") || "1",
-    size: searchParams.get("size") || "10",
-  };
-
-  useEffect(() => setSearchParams(paginate), []);
+  useEffect(() => {
+    setSearchParams({
+      page: pageParams || "1",
+      size: sizeParams || "10",
+    });
+  }, []);
 
   const { data, loading } = useQuery<
     Types.GetAlbumsQuery,
@@ -53,12 +55,8 @@ const AlbumsPage: React.FC = () => {
               size: pageSize.toString(),
             });
           },
-          current: searchParams.get("page")
-            ? Number(searchParams.get("page"))
-            : 1,
-          pageSize: searchParams.get("size")
-            ? Number(searchParams.get("size"))
-            : 10,
+          current: pageParams ? Number(pageParams) : 1,
+          pageSize: sizeParams ? Number(sizeParams) : 10,
           pageSizeOptions: [10, 20, 50],
         }}
         scroll={{ y: 510 }}

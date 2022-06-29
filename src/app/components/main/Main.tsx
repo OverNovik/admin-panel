@@ -1,9 +1,9 @@
 import React from "react";
 import { Layout } from "antd";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { PrivateRoute, PublicRoute } from "app/components";
 import { useAuth } from "hooks";
 import * as Pages from "pages";
-import { PrivateRoute, PublicRoute } from "..";
 import styles from "./Main.module.css";
 
 const { Content } = Layout;
