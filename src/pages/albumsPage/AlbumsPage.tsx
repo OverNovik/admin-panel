@@ -31,7 +31,7 @@ const AlbumsPage: React.FC = () => {
         id: item?.id,
         title: item?.title,
         username: item?.user?.name,
-        currPhotos: item?.photos?.data?.length,
+        currPhotos: item?.photos?.data,
         key: item?.id,
       };
     }
@@ -68,8 +68,8 @@ const AlbumsPage: React.FC = () => {
         <Column title="User name" dataIndex="username" key="username" />
         <Column
           title="Number of photos"
-          dataIndex="currPhotos"
           key="currPhotos"
+          render={(item: Types.Data) => item.currPhotos?.length}
         />
         <Column
           render={(item: Types.Data) => (
