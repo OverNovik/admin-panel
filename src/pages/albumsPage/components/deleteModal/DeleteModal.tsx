@@ -16,11 +16,7 @@ const DeleteModal: React.FC<Types.DeleteModalProps> = ({ id }) => {
   };
 
   const handleOk = () => {
-    deleteModal({
-      variables: {
-        id,
-      },
-    });
+    deleteModal({ variables: { id } });
     setIsModalVisible(false);
   };
 

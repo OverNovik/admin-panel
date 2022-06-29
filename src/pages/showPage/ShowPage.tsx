@@ -17,20 +17,12 @@ const ShowPage: React.FC = () => {
   const { data, loading } = useQuery<
     Types.GetAlbumInfoQuery,
     Types.GetAlbumInfoQueryVariables
-  >(operations.getAlbumInfo, {
-    variables: {
-      id,
-    },
-  });
+  >(operations.getAlbumInfo, { variables: { id } });
 
   const { data: photos, loading: photosLoading } = useQuery<
     Types.GetPhotosInfoQuery,
     Types.GetPhotosInfoQueryVariables
-  >(operations.getPhotosInfo, {
-    variables: {
-      id,
-    },
-  });
+  >(operations.getPhotosInfo, { variables: { id } });
 
   const photoItem: Types.PhotoItem[] | undefined =
     photos?.album?.photos?.data?.map((item) => {

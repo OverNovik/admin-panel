@@ -16,11 +16,7 @@ const PhotoInfoPage: React.FC = () => {
   const { data, loading } = useQuery<
     Types.GetPhotoInfoQuery,
     Types.GetPhotoInfoQueryVariables
-  >(operations.getPhotoInfo, {
-    variables: {
-      id,
-    },
-  });
+  >(operations.getPhotoInfo, { variables: { id } });
 
   if (!data || loading) {
     return <Spinner />;

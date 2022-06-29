@@ -20,11 +20,7 @@ const EditForm: React.FC = () => {
   const { data, loading: albumInfoLoading } = useQuery<
     Types.GetAlbumQuery,
     Types.GetAlbumQueryVariables
-  >(operations.getAlbum, {
-    variables: {
-      id,
-    },
-  });
+  >(operations.getAlbum, { variables: { id } });
 
   const { data: userData, loading: userInfoLoading } = useQuery<
     Types.GetUsersSelectQuery,
