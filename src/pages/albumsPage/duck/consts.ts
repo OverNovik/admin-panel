@@ -8,7 +8,7 @@ export const getPaginationParams = (
   const sizeValue = Number(searchParams.get("size"));
 
   return {
-    page: +pageValue > 0 ? +pageValue : 1,
-    size: +sizeValue > 0 ? +sizeValue : 10,
+    page: Number(pageValue) > 0 ? Number(pageValue) : 1,
+    size: Number(sizeValue) > 0 ? Number(sizeValue) : 10,
   };
 };
