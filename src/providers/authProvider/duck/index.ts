@@ -1,2 +1,2 @@
 export * as Types from "./types";
-export * as сonsts from "./consts";
+export * as consts from "./consts";

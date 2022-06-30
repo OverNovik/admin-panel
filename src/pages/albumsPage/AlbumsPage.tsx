@@ -1,27 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Spinner } from "components";
 import { DeleteModal } from "./components";
-import { operations, Types } from "./duck";
+import { consts, operations, Types } from "./duck";
 
 const { Column } = Table;
 
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageParams =
-    Number(searchParams.get("page")) < 0 ? "1" : searchParams.get("page");
-  const sizeParams =
-    Number(searchParams.get("size")) < 0 ? "10" : searchParams.get("size");
+  const [paginationValues, setPaginationValues] = useState({
+    page: 1,
+    size: 10,
+  });
 
   useEffect(() => {
+    const paginationParams = consts.getPaginationParams(searchParams);
     setSearchParams({
-      page: pageParams || "1",
-      size: sizeParams || "10",
+      page: paginationParams.page.toString(),
+      size: paginationParams.size.toString(),
     });
+    setPaginationValues(paginationParams);
   }, []);
 
   const { data, loading } = useQuery<
@@ -35,7 +37,7 @@ const AlbumsPage: React.FC = () => {
         id: item?.id,
         title: item?.title,
         username: item?.user?.name,
-        currPhotos: item?.photos?.data,
+        currPhotos: item?.photos,
         key: item?.id,
       };
     }
@@ -57,8 +59,8 @@ const AlbumsPage: React.FC = () => {
               size: pageSize.toString(),
             });
           },
-          current: pageParams ? Number(pageParams) : 1,
-          pageSize: sizeParams ? Number(sizeParams) : 10,
+          current: +paginationValues.page,
+          pageSize: +paginationValues.size,
           pageSizeOptions: [10, 20, 50],
         }}
         scroll={{ y: 510 }}
@@ -69,10 +71,10 @@ const AlbumsPage: React.FC = () => {
         <Column
           title="Number of photos"
           key="currPhotos"
-          render={(item: Types.Data) => item.currPhotos?.length}
+          render={(item) => item.currPhotos.data.length}
         />
         <Column
-          render={(item: Types.Data) => (
+          render={(item) => (
             <Space size="small">
               <Button
                 size="small"
