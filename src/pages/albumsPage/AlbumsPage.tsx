@@ -47,17 +47,11 @@ const AlbumsPage: React.FC = () => {
       <Table
         size="small"
         dataSource={dataItems}
-        pagination={{
-          onChange(page, pageSize) {
-            setSearchParams({
-              page: page.toString(),
-              size: pageSize.toString(),
-            });
-          },
-          current: Number(paginationParams.page),
-          pageSize: Number(paginationParams.size),
-          pageSizeOptions: [10, 20, 50],
-        }}
+        pagination={consts.tablePagination(
+          paginationParams.page,
+          paginationParams.size,
+          setSearchParams
+        )}
         scroll={{ y: 510 }}
       >
         <Column title="ID" dataIndex="id" key="id" />
