@@ -4,16 +4,15 @@ import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Spinner } from "components";
-import { getPaginationParams, tablePagination } from "utils/pagination";
 import { DeleteModal } from "./components";
-import { operations, Types } from "./duck";
+import { operations, Types, utils } from "./duck";
 
 const { Column } = Table;
 
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const paginationParams = getPaginationParams(searchParams);
+  const paginationParams = utils.getPaginationParams(searchParams);
 
   useEffect(() => {
     setSearchParams({
@@ -48,11 +47,17 @@ const AlbumsPage: React.FC = () => {
       <Table
         size="small"
         dataSource={dataItems}
-        pagination={tablePagination(
-          paginationParams.page,
-          paginationParams.size,
-          setSearchParams
-        )}
+        pagination={{
+          onChange(page, pageSize) {
+            setSearchParams({
+              page: page.toString(),
+              size: pageSize.toString(),
+            });
+          },
+          current: Number(paginationParams.page),
+          pageSize: Number(paginationParams.size),
+          pageSizeOptions: [10, 20, 50],
+        }}
         scroll={{ y: 510 }}
       >
         <Column title="ID" dataIndex="id" key="id" />
