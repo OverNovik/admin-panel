@@ -4,9 +4,7 @@ export * from "./operations.generated";
 export interface DataItems {
   id: Maybe<string> | undefined;
   key: Maybe<string> | undefined;
-  currPhotos:
-    | Maybe<{ data?: Maybe<Maybe<Pick<Photo, "id">>[]> | undefined }>
-    | undefined;
+  photos: Maybe<Maybe<Pick<Photo, "id">>[]> | undefined;
   title: Maybe<string> | undefined;
   username: Maybe<string> | undefined;
 }

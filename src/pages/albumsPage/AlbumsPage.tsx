@@ -4,15 +4,16 @@ import { useQuery } from "@apollo/client";
 import { Button, Space, Table } from "antd";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Spinner } from "components";
+import { getPaginationParams, tablePagination } from "utils/pagination";
 import { DeleteModal } from "./components";
-import { consts, operations, Types } from "./duck";
+import { operations, Types } from "./duck";
 
 const { Column } = Table;
 
 const AlbumsPage: React.FC = () => {
   const navigation = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const paginationParams = consts.getPaginationParams(searchParams);
+  const paginationParams = getPaginationParams(searchParams);
 
   useEffect(() => {
     setSearchParams({
@@ -32,7 +33,7 @@ const AlbumsPage: React.FC = () => {
         id: item?.id,
         title: item?.title,
         username: item?.user?.name,
-        currPhotos: item?.photos,
+        photos: item?.photos?.data,
         key: item?.id,
       };
     }
@@ -47,7 +48,7 @@ const AlbumsPage: React.FC = () => {
       <Table
         size="small"
         dataSource={dataItems}
-        pagination={consts.tablePagination(
+        pagination={tablePagination(
           paginationParams.page,
           paginationParams.size,
           setSearchParams
@@ -60,7 +61,7 @@ const AlbumsPage: React.FC = () => {
         <Column
           title="Number of photos"
           key="currPhotos"
-          render={(item) => item.currPhotos.data.length}
+          render={(item) => item.photos.length}
         />
         <Column
           render={(item) => (
