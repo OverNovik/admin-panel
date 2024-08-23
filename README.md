@@ -3,7 +3,7 @@
 [ADMIN-PANEL](https://admin-panel-overnovik.vercel.app/login)
 
 Login: test@mail.com
-Password: 11111
+Password: 111111
 
 # Getting Started with Create React App
 
